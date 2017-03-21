@@ -78,13 +78,13 @@ public class AreaCheckServlet extends HttpServlet {
                     else{
                         out.println("No");
                     }
+
                 out.println("</td>");
             out.println("</tr>");
+
         }
         out.println("</table>");
-
         out.println("<a href=\"/GlassFishApplication_war_exploded\">Do you want add another point?</a>");
-
 
         out.println("</body>");
         out.println("</html>");
