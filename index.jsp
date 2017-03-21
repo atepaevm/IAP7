@@ -38,7 +38,7 @@
         </div>
         </header>
 
-    <form action="server.php" id="sender" method="post" onsubmit="return checkValues();">
+    <form action="checking.jsp" id="sender" method="post" onsubmit="return checkValues();">
             <table>
                     <tr>
                             <td>
