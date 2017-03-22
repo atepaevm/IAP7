@@ -91,7 +91,8 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        PrintWriter out=response.getWriter();
+	out.println(request.getParameter("x_coord"));
     }
     class Point {
         private int x;

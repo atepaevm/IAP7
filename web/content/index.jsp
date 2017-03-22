@@ -28,6 +28,7 @@
     <meta charset="UTF-8">
     <title>Form</title>
     <script src="parser.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
 <header>
@@ -38,7 +39,7 @@
     </div>
 </header>
 
-<form action="checking" id="sender" method="post" onsubmit="return checkValues();">
+<form action="" id="sender" method="post" onsubmit="return checkValues();">
     <table>
         <tr>
             <td>
@@ -115,6 +116,7 @@
                     }
                     function drawPoint(context, x, y, isInside){
                         context.beginPath();
+			doRequest();
                         if(isInside){
                             context.fillStyle = "Green";
                         } else {
@@ -187,5 +189,6 @@
         </tr>
     </table>
     <input type="submit" value="Отправить">
+	<div id="result"> </div>
 </form>
 </body>
