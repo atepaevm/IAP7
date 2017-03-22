@@ -1,5 +1,3 @@
-package Controller;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,14 +8,15 @@ import java.io.IOException;
 /**
  * Created by 12 on 20.03.2017.
  */
-@WebServlet(name = "ControllerServlet", urlPatterns = "/index")
+@WebServlet(name = "ControllerServlet", urlPatterns = {"/controller"})
 public class ControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	System.out.println(request.getRequestURL());
         String xString=request.getParameter("x_coord");
         String yString=request.getParameter("y_coord");
         String RString=request.getParameter("chBox");
         int x=1000;
-        int y=1000
+        int y=1000;
         int R=1000;
         boolean isWrong=false;
         try{
@@ -40,6 +39,6 @@ public class ControllerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	doPost(request, response);
     }
 }

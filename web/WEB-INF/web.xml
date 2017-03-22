@@ -6,7 +6,7 @@
     <display-name>AreaCheckServlet</display-name>
     <servlet>
         <servlet-name>AreaCheckServlet</servlet-name>
-        <servlet-class>Controller.AreaCheckServlet</servlet-class>
+        <servlet-class>AreaCheckServlet</servlet-class>
         <init-param>
             <param-name>a</param-name>
             <param-value>123</param-value>

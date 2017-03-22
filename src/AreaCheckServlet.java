@@ -1,4 +1,3 @@
-package Controller;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -84,7 +83,7 @@ public class AreaCheckServlet extends HttpServlet {
 
         }
         out.println("</table>");
-        out.println("<a href=\"/GlassFishApplication_war_exploded\">Do you want add another point?</a>");
+        out.println("<a href='/lab7'>Do you want add another point?</a>");
 
         out.println("</body>");
         out.println("</html>");
