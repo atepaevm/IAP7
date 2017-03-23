@@ -11,7 +11,7 @@
 	<target name="build" depends="init">
 		<javac srcdir="${src}" 
 			destdir="${build}"
-			classpath="lib/javax.jar"/>
+			classpath="lib/javax_json.jar:lib/javax.jar"/>
 	</target>
 
 	<target name="war-build" depends="build">

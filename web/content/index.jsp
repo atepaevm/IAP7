@@ -27,7 +27,6 @@
     </style>
     <meta charset="UTF-8">
     <title>Form</title>
-    <script src="parser.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
@@ -37,6 +36,53 @@
         группа P3210
         Вариант 10000
     </div>
+    <script type="text/javascript">
+	x_val = [];
+	y_val = [];
+	
+function checkValues(){
+	x = document.getElementById("x_coord").value;
+	if(isNaN(x) || x > 5 || x < -3){
+		alert("Неверный x");
+		return false;
+	}
+    	y = document.getElementById("y_coord").value;
+    	if(isNaN(y) || y < -5 || y > 3){
+        	alert("Неверный y");
+       		return false;
+    	}
+    	if(r == 0){
+ 		alert("Не установлен r");
+		return false;
+    	}
+    	return true;
+}
+
+function doRequest(x, y){
+	new_data = [];
+	$.ajax({
+       		 type:"get",
+       		 url:"",
+       		 data:{
+        	    x_coord: JSON.stringify(x),
+        	    y_coord: JSON.stringify(y),
+       		    chBox: r 
+        	},
+    	success:onAjaxSuccess
+	});
+    function onAjaxSuccess(data){
+	new_data = JSON.parse(data);
+	context = canvas.getContext("2d");
+	for(i=0; i < new_data.length; ++i){
+		coord_x = x[i] * pixel_transform + 300;
+		coord_y = -y[i] * pixel_transform +300;
+		drawPoint(context, coord_x, coord_y, new_data[i]);		
+	}
+    }
+}
+    </script>
+
+	
 </header>
 
 <form action="" id="sender" method="post" onsubmit="return checkValues();">
@@ -108,15 +154,13 @@
                         } else {
                             real_x = (x-300)/pixel_transform;
                             real_y = -(y-300)/pixel_transform;
-                            console.log("real_x: " + real_x + " real_y: " + real_y);
-                            //TODO: add server request
-                            context = canvas.getContext("2d");
-                            drawPoint(context, x, y, true);
+			    x_val.push(real_x);
+			    y_val.push(real_y);
+			    doRequest([real_x], [real_y]);
                         }
                     }
                     function drawPoint(context, x, y, isInside){
                         context.beginPath();
-			doRequest();
                         if(isInside){
                             context.fillStyle = "Green";
                         } else {

@@ -13,7 +13,6 @@ import java.io.IOException;
 public class ControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	PrintWriter out = response.getWriter();
-	out.println(request.getRequestURL());
         String xString=request.getParameter("x_coord");
         String yString=request.getParameter("y_coord");
         String RString=request.getParameter("chBox");

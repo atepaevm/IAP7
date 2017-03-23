@@ -5,10 +5,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.json.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.StringReader;
 
 /**
  * Created by 12 on 21.03.2017.
@@ -91,18 +93,35 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       	response.setHeader("Content-Type", "text/html; charset=UTF-8");
         PrintWriter out=response.getWriter();
-	out.println(request.getParameter("x_coord"));
+	String xString = request.getParameter("x_coord");
+	String yString = request.getParameter("y_coord");
+	String rString = request.getParameter("chBox");
+
+	JsonReader jsonReader = Json.createReader(new StringReader(xString));
+ 	JsonArray x_array = jsonReader.readArray();
+	jsonReader = Json.createReader(new StringReader(yString));
+	JsonArray y_array = jsonReader.readArray();
+	int r = Integer.parseInt(rString);
+	
+	JsonArrayBuilder result = Json.createArrayBuilder();
+	
+	for(int i=0; i < x_array.size(); ++i){
+		result.add(checkArea(x_array.getJsonNumber(i).doubleValue(), y_array.getJsonNumber(i).doubleValue(), r));
+	}
+	JsonArray res = result.build();
+	out.println(res);
     }
     class Point {
-        private int x;
-        private int y;
-        Point(int x,int y){
+        private double x;
+        private double y;
+        Point(double x,double y){
             this.x=x;
             this.y=y;
         }
     }
-    public static boolean checkArea(int x,int y,int R){
+    public static boolean checkArea(double x,double y,int R){
         if(x<=0&&y<=0&&x*x+y*y<=R*R){
             return true;
         }
