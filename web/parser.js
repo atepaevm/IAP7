@@ -1,22 +1,20 @@
 function checkValues(){
-	/*
-	 x = document.getElementById("x_coord").value;
-	 if(isNaN(x) || x > 5 || x < -3){
-	 alert("Неверный x");
-	 return false;
-	 }*/
+    x = document.getElementById("x_coord").value;
+    if(isNaN(x) || x > 5 || x < -3){
+        alert("Неверный x");
+        return false;
+    }
     y = document.getElementById("y_coord").value;
-    if(isNaN(y) || y < -5 || y > 5){
+    if(isNaN(y) || y < -5 || y > 3){
         alert("Неверный y");
         return false;
     }
-    if(isNaN(x) || y < -5 || y > 5){
-        alert("Неверный y");
+    if(r == 0){
+        alert("Не установлен r");
         return false;
     }
     return true;
 }
-
 
 
 

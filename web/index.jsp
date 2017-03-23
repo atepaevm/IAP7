@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="Controller.AreaCheckServlet" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" language="java"%>
 <!DOCTYPE html>
 <head>
     <style>
@@ -9,7 +12,6 @@
             background: #f0f0f0;
             font-family:fantasy;
             font-style: italic;
-
         }
         .indent {
             padding: 5%;
@@ -38,7 +40,7 @@
     </div>
 </header>
 
-<form action="checking" id="sender" method="post" onsubmit="return checkValues();">
+<form action="ControllerServlet" id="sender" method="post" onsubmit="return checkValues();">
     <table>
         <tr>
             <td>
@@ -73,8 +75,6 @@
                             }
                         }
                     }
-
-
                     function radioImitation(num) {
                         r = 0;
                         for(i = 0; i < checkBoxes.length; i++){
@@ -87,7 +87,6 @@
                         }
                         canvasFill();
                     }
-
                     function canvasFill(){
                         canvas.width = canvas.width
                         context = canvas.getContext("2d");
@@ -96,7 +95,6 @@
                         }
                         drawCoordinates(context);
                     }
-
                     function setPoint(event){
                         rect = canvas.getBoundingClientRect();
                         offset = (rect.width - canvas.width)/2 + 1;
@@ -123,7 +121,6 @@
                         context.arc(x, y, 3, 0*Math.PI, 2*Math.PI);
                         context.fill();
                     }
-
                     function drawCoordinates(context){
                         context.beginPath();
                         /*Draw coordianates*/
@@ -159,7 +156,6 @@
                         context.textBaseline="bottom";
                         context.fillText("X", 600, 290);
                     }
-
                     function drawFigure(context){
                         pix = r * pixel_transform;
                         /*Arc fill*/
@@ -187,5 +183,53 @@
         </tr>
     </table>
     <input type="submit" value="Отправить">
+    <%
+        List<AreaCheckServlet.Point> list=(ArrayList<AreaCheckServlet.Point>)getServletConfig().getServletContext().getAttribute("list");
+
+        if(list!=null){
+    out.println("<table border=\"1\" bordercolor=\"red\" >");
+    out.println("<tr>");
+        out.println("<td>");
+            out.println("X coordinate");
+            out.println("</td>");
+        out.println("<td>");
+            out.println("Y coordinate");
+            out.println("</td>");
+        out.println("<td>");
+            out.println("Radius");
+            out.println("</td>");
+        out.println("<td>");
+            out.println("Entrance");
+            out.println("</td>");
+        out.println("</tr>");
+
+        for(int i=0;i<list.size();i++){
+    out.println("<tr>");
+        out.println("<td>");
+            out.println(list.get(i).x);
+            out.println("</td>");
+        out.println("<td>");
+            out.println(list.get(i).y);
+            out.println("</td>");
+        out.println("<td>");
+            out.println(list.get(i).R);
+            out.println("</td>");
+        out.println("<td>");
+
+            if(list.get(i).isInArea){
+            out.println("Yes");
+            }
+            else{
+            out.println("No");
+            }
+
+            out.println("</td>");
+        out.println("</tr>");
+    }
+    out.println("</table>");
+    }
+
+    %>
+
 </form>
 </body>
